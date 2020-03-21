@@ -1,10 +1,10 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 
 const p = path.join(
   path.dirname(process.mainModule.filename),
-  "data",
-  "cart.json"
+  'data',
+  'cart.json'
 );
 
 module.exports = class Cart {
@@ -45,13 +45,16 @@ module.exports = class Cart {
       }
       const updatedCart = { ...JSON.parse(fileContent) };
       const product = updatedCart.products.find(prod => prod.id === id);
+      if (!product) {
+          return;
+      }
       const productQty = product.qty;
       updatedCart.products = updatedCart.products.filter(
         prod => prod.id !== id
       );
       updatedCart.totalPrice =
         updatedCart.totalPrice - productPrice * productQty;
-      console.log(updatedCart);
+
       fs.writeFile(p, JSON.stringify(updatedCart), err => {
         console.log(err);
       });
