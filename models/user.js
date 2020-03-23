@@ -1,20 +1,24 @@
 const Sequelize = require("sequelize");
-const sequelize = require("../util/sqlDB");
 
+const sequelize = require("../util/sqlDB");
 const Model = Sequelize.Model;
-class Cart extends Model {}
-Cart.init(
+class User extends Model {}
+User.init(
   {
     id: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
       allowNull: false,
       primaryKey: true
-    }
+    },
+    name: Sequelize.STRING,
+    email: Sequelize.STRING
   },
   {
     sequelize,
-    modelName: "cart"
+    modelName: "user"
+    // options
   }
 );
-module.exports = Cart;
+
+module.exports = User;
