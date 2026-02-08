@@ -15,16 +15,34 @@ updates:
       separator: "/"
     allow:
       - dependency-type: "all"
+    groups:
+      all:
+        patterns:
+          - "*"
+      development:
+        dependency-type: development
+        update-types:
+          - "minor"
+          - "patch"
+      production:
+        dependency-type: production
+        update-types:
+          - "minor"
+          - "patch"
 
   # Docker images
-  - package-ecosystem: "docker"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-    labels:
-      - "dependencies"
-      - "docker"
+  # - package-ecosystem: "docker"
+  #   directory: "/"
+  #   schedule:
+  #     interval: "weekly"
+  #     day: "monday"
+  #   labels:
+  #     - "dependencies"
+  #     - "docker"
+  #   groups:
+  #     docker-updates:
+  #       patterns:
+  #         - "*"
 
   # GitHub Actions
   - package-ecosystem: "github-actions"
@@ -35,3 +53,7 @@ updates:
     labels:
       - "dependencies"
       - "github-actions"
+    groups:
+      actions-updates:
+        patterns:
+          - "*"
